@@ -7,7 +7,7 @@ const ejsMate = require("ejs-mate")
 
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
-//app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({extended:true}));
 app.engine("ejs",ejsMate);
 app.use(express.static(path.join(__dirname,"public")));
 
@@ -44,8 +44,7 @@ app.get("/user/new",async(req,res)=>{
 app.post("/user",(req,res)=>{
     let {username,email,password} = req.body;
     let newUser  = new formdata({
-      username: username,
-      image:image,
+      name: username,
       email: email,
       password: password,
  });
@@ -59,8 +58,21 @@ app.post("/user",(req,res)=>{
   });
 
 
+/*app.post("/user/new",async(req,res)=>{
+    let {username,email,password} = req.body;
+    let newUser  = new formdata({
+        username: username,
+        email: email,
+        password: password,
+   });
+   // const newUser = new formdata(req.body.formdata); 
+    await newUser.save();
+    console.log(formdata);
+})
+*/
+
 // show route
-app.get("/user/show",async(req,res)=>{
+app.post("/user/show",async(req,res)=>{
     /*let {id} = req.params;*/
     let formdatas = await formdata.find();
     res.render("pages/show.ejs",{formdatas})
@@ -79,7 +91,7 @@ app.get("/user/log",async(req,res)=>{
 app.get("/user/:id/delete",(req,res)=>{
     let {id} = req.params;
     const user = formdata.findById(id);
-    res.render("delete.ejs",{user});
+    res.render("pages/delete.ejs",{user});
 });
 
 
@@ -93,9 +105,8 @@ app.delete("/user/:id",(req,res)=>{
                 res.send("wrond password");
             }
             else{
-                let q2 = formdata.findByIdAndDelete(id);
-            
-        }
+                return true;
+            }
 });
 
 

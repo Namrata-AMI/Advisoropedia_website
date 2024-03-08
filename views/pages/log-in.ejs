@@ -1,20 +1,53 @@
 <%- layout("/layouts/boilerplate") %>
 
-<form method="get">
+
+<body>
+<form method="post" action="/user/show" onsubmit="return validateForm();">
     <div class="form-group">
       <label for="exampleInputEmail1"><b>Email address</b></label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1"><b>Password</b></label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
     </div>
     <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1" name="agreeCheckbox">
       <label class="form-check-label" for="exampleCheck1">Confirm</label>
       <br><br>
     </div>
     <button type="submit" class="btn btn-primary mb-3">Submit</button>
 
   </form>
+
+  <script>
+    function validateForm() {
+        var email = document.myform.email.value;
+        var password = document.myform.password.value;
+
+         if (email == null || email == "") {
+            alert("Email must be filled out");
+            return false;
+        }
+        else if (password == "" || password == null) {
+            alert("Password must be filled out");
+            return false;
+        }
+        else if (password.length < 8) {
+            alert("Password must be at least 8 characters long");
+            return false;
+        }
+
+        var agreeCheckbox = document.getElementById("agreeCheckbox");
+        if (!agreeCheckbox.checked) {
+            alert("Please agree to the terms and conditions");
+            return false;
+        }
+        alert(`welcome ${name}`);
+        return true;
+    }
+</script>
+
+
+</body>

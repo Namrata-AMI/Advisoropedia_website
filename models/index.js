@@ -12,7 +12,8 @@ const formSchema = new mongoose.Schema({
 
     image:{
         type:String,
-        default: "https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHRyYXZlbHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
+        default:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJYXQooGXIj2Ec4z6K73Kq4pbH5BmwwU_sSBajbBCxvw&s",
+        set: (v) => v === "" ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJYXQooGXIj2Ec4z6K73Kq4pbH5BmwwU_sSBajbBCxvw&s":v,              // setting v (value) of image//
     },
     
     password:{
