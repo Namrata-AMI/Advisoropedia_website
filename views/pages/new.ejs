@@ -1,0 +1,67 @@
+<%- layout("/layouts/boilerplate1") %>
+<body>
+    <h3 class="sign">Sign-up</h3><br><br>
+
+    <div class="post">
+       
+      
+        <form method="post" action="/user/show" name="myform" onsubmit="return validateForm();">
+            <div>
+                <label for="name" class="form-label"> Name</label>
+                <input type="text" placeholder="Enter your name" name="name" class="form-control">
+            </div>
+            <br><br>
+            <div>
+                <label for="email" class="form-label"> Email-Id</label>
+                <input type="email" placeholder="Enter your email" name="email" class="form-control">
+            </div>
+            <br><br>
+            <div>
+                <label for="password" class="form-label"> Password</label>
+                <input type="password" placeholder="Enter your password" name="password" class="form-control">
+            </div>
+            <br><br>
+            <div>
+                <input type="checkbox" name="agree" id="agreeCheckbox">   Are you agree with all information provided is correct.<br>
+            </div><br><br>
+            <button class="btn btn-outline-primary">Send </button>
+            <br>
+            <br>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            var name = document.myform.name.value;
+            var email = document.myform.email.value;
+            var password = document.myform.password.value;
+
+            if (name == null || name == "") {
+                alert("Name must be filled out");
+                return false;
+            }
+            else if (email == null || email == "") {
+                alert("Email must be filled out");
+                return false;
+            }
+            else if (password == "" || password == null) {
+                alert("Password must be filled out");
+                return false;
+            }
+            else if (password.length < 8) {
+                alert("Password must be at least 8 characters long");
+                return false;
+            }
+
+            var agreeCheckbox = document.getElementById("agreeCheckbox");
+            if (!agreeCheckbox.checked) {
+                alert("Please agree to the terms and conditions");
+                return false;
+            }
+            alert(`welcome ${name}`);
+            return true;
+        }
+    </script>
+
+</body>
+</html>

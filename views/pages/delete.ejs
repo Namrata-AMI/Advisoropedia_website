@@ -1,0 +1,10 @@
+<%- layout("/layouts/boilerplate") %>
+<body>
+ <h1> delete your info.</h1>
+        <form method="post" action="/user/<%=user.id%>?_method=DELETE">
+            <input type="password" placeholder="enter your password " name="password">
+            <button> Delete</button>
+        </form>
+    
+</body>
+</html>
